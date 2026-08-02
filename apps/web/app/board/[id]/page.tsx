@@ -1,9 +1,4 @@
-import dynamic from 'next/dynamic'
-
-const BoardRoom = dynamic(
-  () => import('@/components/board/BoardRoom').then(mod => mod.BoardRoom),
-  { ssr: false, loading: () => <div className="h-screen w-screen bg-background flex items-center justify-center font-sketch text-2xl text-muted-foreground animate-pulse">Loading board...</div> }
-)
+import { ClientBoard } from '@/components/board/ClientBoard'
 
 export default async function BoardPage({
   params,
@@ -15,7 +10,7 @@ export default async function BoardPage({
   const { id } = await params
   const sp = await searchParams
   const isInvite = sp.invite === 'true'
-  return <BoardRoom roomId={id} isInvite={isInvite} />
+  return <ClientBoard roomId={id} isInvite={isInvite} />
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {

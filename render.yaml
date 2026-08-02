@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: draww-server
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: "bun install"
+    startCommand: "bun run src/index.ts"
+    rootDir: apps/server
+    envVars:
+      - key: PORT
+        value: 8787
+      - key: FRONTEND_URL
+        sync: false
+    healthCheckPath: /health
